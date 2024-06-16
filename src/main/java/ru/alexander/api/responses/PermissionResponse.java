@@ -5,10 +5,13 @@ import lombok.Getter;
 
 public class PermissionResponse {
     @SerializedName("grantSuccess")
-    public boolean status;
+    private boolean status;
     @Getter
     @SerializedName("requestedPermission")
-    public boolean requestedPermission;
+    private boolean requestedPermission;
+    @Getter
+    @SerializedName("permissions")
+    private Permission[] permissions;
 
     public PermissionStatus getStatus() {
         return status ? PermissionStatus.Granted : PermissionStatus.Denied;
