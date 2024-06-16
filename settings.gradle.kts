@@ -1,1 +1,1 @@
-rootProject.name = "VTubeStudioAPI"
+rootProject.name = "jVTSAPI"

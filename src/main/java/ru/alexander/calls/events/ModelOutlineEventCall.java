@@ -13,6 +13,8 @@ import ru.alexander.api.listeners.ResponseListener;
 import ru.alexander.api.responses.ErrorResponse;
 import ru.alexander.api.responses.SubscriptionResponse;
 
+import java.util.LinkedHashMap;
+
 @Builder
 public class ModelOutlineEventCall implements APICall {
     private final Boolean draw;
@@ -32,14 +34,14 @@ public class ModelOutlineEventCall implements APICall {
     @Override
     public void execute(VTubeStudioAPI api) {
         Gson gson = api.getGson();
-        LinkedTreeMap<String, Object> map = new LinkedTreeMap<>();
+        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         map.put("draw", draw);
         api.subscribe(
                 "ModelOutlineEvent",
                 map,
                 responseListener == null ? null : new ResponseAdapter<>() {
                     @Override
-                    public void onSuccess(LinkedTreeMap<String, Object> value) {
+                    public void onSuccess(LinkedHashMap<String, Object> value) {
                         responseListener.onSuccess(gson.fromJson(gson.toJsonTree(value), SubscriptionResponse.class));
                     }
 

@@ -13,6 +13,8 @@ import ru.alexander.api.responses.ErrorResponse;
 import ru.alexander.api.responses.SubscriptionResponse;
 import ru.alexander.api.APICall;
 
+import java.util.LinkedHashMap;
+
 @Builder
 public class ModelClickedEventCall implements APICall {
     private final boolean onlyClicksOnModel;
@@ -32,14 +34,14 @@ public class ModelClickedEventCall implements APICall {
     @Override
     public void execute(VTubeStudioAPI api) {
         Gson gson = api.getGson();
-        LinkedTreeMap<String, Object> map = new LinkedTreeMap<>();
+        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
         map.put("onlyClicksOnModel", onlyClicksOnModel);
         api.subscribe(
                 "ModelClickedEvent",
                 map,
                 responseListener == null ? null : new ResponseAdapter<>() {
                     @Override
-                    public void onSuccess(LinkedTreeMap<String, Object> value) {
+                    public void onSuccess(LinkedHashMap<String, Object> value) {
                         responseListener.onSuccess(gson.fromJson(gson.toJsonTree(value), SubscriptionResponse.class));
                     }
 

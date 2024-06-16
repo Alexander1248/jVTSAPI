@@ -1,10 +1,9 @@
 package ru.alexander.api.messaging;
 
-import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
-import com.google.gson.internal.LinkedTreeMap;
 import lombok.Getter;
 
+import java.util.LinkedHashMap;
 import java.util.UUID;
 
 public class VTubeStudioRequest {
@@ -23,17 +22,17 @@ public class VTubeStudioRequest {
 
     @Getter
     @SerializedName("data")
-    private LinkedTreeMap<String, Object> data;
+    private LinkedHashMap<String, Object> data;
 
     public VTubeStudioRequest() {}
 
-    protected VTubeStudioRequest(String id, String messageType, LinkedTreeMap<String, Object> data) {
+    protected VTubeStudioRequest(String id, String messageType, LinkedHashMap<String, Object> data) {
         this.id = id;
         this.messageType = messageType;
         this.data = data;
     }
 
-    public VTubeStudioRequest(String messageType, LinkedTreeMap<String, Object> data) {
+    public VTubeStudioRequest(String messageType, LinkedHashMap<String, Object> data) {
         this(UUID.randomUUID().toString(), messageType, data);
     }
 

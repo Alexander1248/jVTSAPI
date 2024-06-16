@@ -13,6 +13,8 @@ import ru.alexander.api.listeners.ResponseListener;
 import ru.alexander.api.responses.ErrorResponse;
 import ru.alexander.api.responses.SubscriptionResponse;
 
+import java.util.LinkedHashMap;
+
 @Builder
 public class ModelTransformEventCall implements APICall {
     private final ResponseListener<SubscriptionResponse> responseListener;
@@ -34,7 +36,7 @@ public class ModelTransformEventCall implements APICall {
                 null,
                 responseListener == null ? null : new ResponseAdapter<>() {
                     @Override
-                    public void onSuccess(LinkedTreeMap<String, Object> value) {
+                    public void onSuccess(LinkedHashMap<String, Object> value) {
                         responseListener.onSuccess(gson.fromJson(gson.toJsonTree(value), SubscriptionResponse.class));
                     }
 

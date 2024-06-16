@@ -11,6 +11,7 @@ import ru.alexander.api.listeners.ResponseListener;
 import ru.alexander.api.messaging.VTubeStudioRequest;
 import ru.alexander.api.responses.ErrorResponse;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -37,11 +38,11 @@ public class StateMachine {
         Gson gson = getGson();
         api.send(new VTubeStudioRequest(
                         messageType,
-                        gson.fromJson(gson.toJsonTree(data), LinkedTreeMap.class)
+                        gson.fromJson(gson.toJsonTree(data), LinkedHashMap.class)
                 ),
                 new ResponseListener<>() {
                     @Override
-                    public void onSuccess(LinkedTreeMap<String, Object> value) {
+                    public void onSuccess(LinkedHashMap<String, Object> value) {
                         State state = states.get(to);
                         state.setValue(gson.fromJson(gson.toJsonTree(data),
                                 state.getClass().getGenericInterfaces()[0]));

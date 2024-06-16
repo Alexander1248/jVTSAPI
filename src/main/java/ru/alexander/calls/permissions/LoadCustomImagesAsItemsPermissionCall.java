@@ -8,6 +8,8 @@ import ru.alexander.api.listeners.ResponseListener;
 import ru.alexander.api.responses.ErrorResponse;
 import ru.alexander.api.responses.PermissionResponse;
 
+import java.util.LinkedHashMap;
+
 public class LoadCustomImagesAsItemsPermissionCall implements APICall {
     private final  ResponseListener<PermissionResponse> listener;
 
@@ -21,7 +23,7 @@ public class LoadCustomImagesAsItemsPermissionCall implements APICall {
         api.requestPermission("LoadCustomImagesAsItems",
                 new ResponseListener<>() {
                     @Override
-                    public void onSuccess(LinkedTreeMap<String, Object> value) {
+                    public void onSuccess(LinkedHashMap<String, Object> value) {
                         listener.onSuccess(gson.fromJson(gson.toJsonTree(value), PermissionResponse.class));
                     }
 
